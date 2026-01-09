@@ -1,0 +1,29 @@
+<div class="dashboard">
+  <p class="mat-h1">Dashboard de Transacciones</p>
+  <div >
+  <button mat-flat-button  color="primary" (click)="openDialog()">Agregar Transacción</button>
+  </div>
+  <br />
+  <table mat-table [dataSource]="arrTransactions" class="mat-elevation-z2"  >
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef  style="width: 200px;">ID Transacción</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.id }}</td>
+    </ng-container>
+     <ng-container matColumnDef="creationDate">
+      <th mat-header-cell *matHeaderCellDef style="width: 200px;">Fecha</th>  
+      <td mat-cell *matCellDef="let transaction">
+        {{ transaction.creationDate |  date:'dd/MM/yyyy HH:mm:ss' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef style="width: 200px;">Monto</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.amount | currency:'$ ':'symbol':'1.2-2' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="commission">
+      <th mat-header-cell *matHeaderCellDef style="width: 200px;">Comisión</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.commission | currency:'$ ':'symbol':'1.2-2' }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

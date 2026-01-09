@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Insertar Transacción</h2>
+ <mat-dialog-content  class="mat-elevation-z2">
+    <p class="mat-h2">Ingrese el monto de la transacción</p>
+  <mat-form-field>
+    <mat-label>Monto:</mat-label>
+    <input matInput [(ngModel)]="amount" type="number" step="0.01" min="0"required=""
+      #amountInput="ngModel"  pattern="^\d+(\.\d{1,2})?$"/>
+    
+    <mat-error *ngIf="amountInput.invalid && amountInput.touched">
+      <span *ngIf="amountInput.errors?.['required']">El monto es requerido</span>
+      <span *ngIf="amountInput.errors?.['pattern']">Formato inválido (ej: 100.50)</span>
+      <span *ngIf="amountInput.errors?.['min']">El valor debe ser mayor a 0</span>
+    </mat-error>
+  
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="modal-footer">
+  <button mat-raised-button class="btn btn-secondary" (click)="closeDialog()">Cancelar</button>
+  <button mat-raised-button [mat-dialog-close]="amount()" color="primary" cdkFocusInitial  
+    [disabled]="!amount || amountInput.invalid">Guardar</button>  
+</mat-dialog-actions>
